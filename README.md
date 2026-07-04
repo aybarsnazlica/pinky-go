@@ -1,6 +1,6 @@
 # pinky-go
 
-A tree-walking interpreter written in Go for the [Pinky](https://pinky-lang.org) programming language.
+An interpreter written in Go for the [Pinky](https://pinky-lang.org) programming language. It uses a tree-walking architecture, and there is also an online [playground](https://aybarsnazlica.github.io/projects/pinky-go/) if you would like to try it out.
 
 ## Build and Test
 
