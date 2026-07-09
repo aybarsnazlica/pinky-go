@@ -2,7 +2,6 @@ package pinky
 
 import (
 	"strconv"
-	"strings"
 )
 
 type Parser struct {
@@ -534,9 +533,4 @@ func expectFunctionCallExpr(expr Expr, line int) (*FunctionCallExpr, error) {
 		return functionCallExpr, nil
 	}
 	return nil, &ParseError{Line: line, MessageText: "Expected assignment or function call"}
-}
-
-func parserQuote(text string) string {
-	replacer := strings.NewReplacer(`\`, `\\`, `'`, `\'`)
-	return "'" + replacer.Replace(text) + "'"
 }

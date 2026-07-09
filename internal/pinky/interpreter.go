@@ -93,11 +93,12 @@ func (i *Interpreter) Evaluate(expr Expr, env *Environment) (RuntimeValue, error
 		if err != nil {
 			return RuntimeValue{}, err
 		}
-		if n.Op.Kind == TokenOR {
+		switch n.Op.Kind {
+		case TokenOR:
 			if isTruthy(left) {
 				return left, nil
 			}
-		} else if n.Op.Kind == TokenAND {
+		case TokenAND:
 			if !isTruthy(left) {
 				return left, nil
 			}

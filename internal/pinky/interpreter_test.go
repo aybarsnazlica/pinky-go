@@ -1,6 +1,9 @@
 package pinky
 
-import "testing"
+import (
+	"math"
+	"testing"
+)
 
 func TestInterpretEvaluatesLiteralsUnaryBinaryAndGrouping(t *testing.T) {
 	interpreter := NewInterpreter(nil)
@@ -234,8 +237,5 @@ func expectRuntimeError(t *testing.T, err error) *RuntimeError {
 }
 
 func mathCopysignZero(sign float64) float64 {
-	if sign < 0 {
-		return -0.0
-	}
-	return 0.0
+	return math.Copysign(0, sign)
 }
