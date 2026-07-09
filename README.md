@@ -54,7 +54,7 @@ func main() {
 }
 ```
 
-The root package exposes the lexer, parser, AST, interpreter, runner, and sample program.
+The root package exposes the high-level runner and CLI-facing API. The lexer, parser, AST, interpreter, and runtime implementation now live under `internal/`.
 
 ## Code Examples
 
