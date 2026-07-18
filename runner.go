@@ -1,7 +1,5 @@
 package pinky
 
-import internalpinky "github.com/aybarsnazlica/pinky-go/internal/pinky"
-
 type RunResult struct {
 	Success      bool     `json:"success"`
 	Source       string   `json:"source"`
@@ -14,22 +12,22 @@ type RunResult struct {
 }
 
 func RunSource(source string, includeDebug bool) RunResult {
-	lexer := internalpinky.NewLexer(source)
+	lexer := NewLexer(source)
 	tokens, err := lexer.Tokenize()
 	if err != nil {
 		switch typed := err.(type) {
-		case *internalpinky.LexingError:
+		case *LexingError:
 			return failure(source, "lex", typed.MessageText, typed.Line)
 		default:
 			return failure(source, "internal", err.Error(), 0)
 		}
 	}
 
-	parser := internalpinky.NewParser(tokens)
+	parser := NewParser(tokens)
 	ast, err := parser.Parse()
 	if err != nil {
 		switch typed := err.(type) {
-		case *internalpinky.ParseError:
+		case *ParseError:
 			return failure(source, "parse", typed.MessageText, typed.Line)
 		default:
 			return failure(source, "internal", err.Error(), 0)
@@ -37,12 +35,12 @@ func RunSource(source string, includeDebug bool) RunResult {
 	}
 
 	output := ""
-	interpreter := internalpinky.NewInterpreter(func(text string) {
+	interpreter := NewInterpreter(func(text string) {
 		output += text
 	})
 	if _, err := interpreter.InterpretAST(ast); err != nil {
 		switch typed := err.(type) {
-		case *internalpinky.RuntimeError:
+		case *RuntimeError:
 			return failure(source, "runtime", typed.MessageText, typed.Line)
 		default:
 			return failure(source, "internal", err.Error(), 0)
@@ -59,7 +57,7 @@ func RunSource(source string, includeDebug bool) RunResult {
 		for _, token := range tokens {
 			result.Tokens = append(result.Tokens, token.DebugString())
 		}
-		result.AST = internalpinky.PrintPrettyAST(ast.String())
+		result.AST = PrintPrettyAST(ast.String())
 	}
 	return result
 }
