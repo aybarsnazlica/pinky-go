@@ -133,6 +133,6 @@ println '</svg>'
 
 ## Acknowledgments
 
-pinky-go is my Go implementation of the Pinky programming language, based on the interpreter developed in Pikuma's [Create a Programming Language from Scratch](https://pikuma.com/courses/create-a-programming-language-compiler) course.
+pinky-go is my Go implementation of the Pinky programming language, based on the interpreter developed in Pikuma's [Compilers, Interpreters & Formal Languages](https://pikuma.com/courses/create-a-programming-language-compiler) course.
 
 The project retains the original Pinky language and builds on the course implementation with automated tests and WebAssembly support.
